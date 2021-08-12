@@ -1,8 +1,5 @@
 const Koa = require("koa");
 const bodyParser = require("koa-body-parser");
-const mongoose = require("mongoose");
-const jwt = require("koa-jwt");
-const config = require("config");
 const cors = require("@koa/cors");
 const dotenv = require("dotenv");
 dotenv.config();
