@@ -12,6 +12,7 @@ module.exports = {
       professors.push({
         nombre: professor.nombre,
         expediente: professor.expediente,
+        departamento: professor.unidad_organizativa,
       });
     });
 
