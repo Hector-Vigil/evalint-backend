@@ -65,14 +65,14 @@ module.exports = {
                 if (
                   professor.categoria_docente === tc &&
                   professor.categoria_cientifica === sc &&
-                  professor.posicion_ocupacional === op
+                  professor.cargo_ocupacional === op
                 )
                   total[`${tc} ${sc} ${op}`] = 1;
               } else {
                 if (
                   professor.categoria_docente === tc &&
                   professor.categoria_cientifica === sc &&
-                  professor.posicion_ocupacional === op
+                  professor.cargo_ocupacional === op
                 )
                   total[`${tc} ${sc} ${op}`] += 1;
               }
@@ -81,7 +81,7 @@ module.exports = {
                   if (
                     professor.categoria_docente === tc &&
                     professor.categoria_cientifica === sc &&
-                    professor.posicion_ocupacional === op &&
+                    professor.cargo_ocupacional === op &&
                     professor.tipo_de_contrato === ct
                   )
                     total[`${tc} ${sc} ${op} ${ct}`] = 1;
@@ -89,7 +89,7 @@ module.exports = {
                   if (
                     professor.categoria_docente === tc &&
                     professor.categoria_cientifica === sc &&
-                    professor.posicion_ocupacional === op &&
+                    professor.cargo_ocupacional === op &&
                     professor.tipo_de_contrato === ct
                   )
                     total[`${tc} ${sc} ${op} ${ct}`] += 1;
