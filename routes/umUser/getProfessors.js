@@ -13,6 +13,10 @@ module.exports = {
         nombre: professor.nombre,
         expediente: professor.expediente,
         departamento: professor.unidad_organizativa,
+        categoria_docente: professor.categoria_docente,
+        categoria_cientifica: professor.categoria_cientifica,
+        cargo_ocupacional: professor.cargo_ocupacional,
+        tipo_de_contrato: professor.tipo_de_contrato,
       });
     });
 
