@@ -98,6 +98,19 @@ module.exports = {
             });
           });
         });
+        scientificCategory.forEach((sc) => {
+          if (!total[sc]) {
+            if (professor.categoria_cientifica === sc) total[sc] = 1;
+          } else {
+            if (professor.categoria_cientifica === sc) total[sc] += 1;
+          }
+        });
+        total["Docente"] =
+          total["Auxiliar"] +
+          total["Instructor"] +
+          total["Titular"] +
+          total["Asistente"];
+        total["No Docente"] = Object.keys(data).length - total["Docente"];
       }
     });
 

@@ -28,65 +28,64 @@ module.exports = {
     professors = JSON.parse(professors);
 
     professors.forEach((professor) => {
-      
-        teachingCategory.forEach((tc) => {
-            if (!total[tc]) {
-            if (professor.categoria_docente === tc) total[tc] = 1;
-            } else {
-            if (professor.categoria_docente === tc) total[tc] += 1;
-            }
-            scientificCategory.forEach((sc) => {
-            if (!total[`${tc} ${sc}`]) {
-                if (
+      teachingCategory.forEach((tc) => {
+        if (!total[tc]) {
+          if (professor.categoria_docente === tc) total[tc] = 1;
+        } else {
+          if (professor.categoria_docente === tc) total[tc] += 1;
+        }
+        scientificCategory.forEach((sc) => {
+          if (!total[`${tc} ${sc}`]) {
+            if (
+              professor.categoria_docente === tc &&
+              professor.categoria_cientifica === sc
+            )
+              total[`${tc} ${sc}`] = 1;
+          } else {
+            if (
+              professor.categoria_docente === tc &&
+              professor.categoria_cientifica === sc
+            )
+              total[`${tc} ${sc}`] += 1;
+          }
+          occupationalPosition.forEach((op) => {
+            if (!total[`${tc} ${sc} ${op}`]) {
+              if (
                 professor.categoria_docente === tc &&
-                professor.categoria_cientifica === sc
-                )
-                total[`${tc} ${sc}`] = 1;
+                professor.categoria_cientifica === sc &&
+                professor.cargo_ocupacional === op
+              )
+                total[`${tc} ${sc} ${op}`] = 1;
             } else {
-                if (
+              if (
                 professor.categoria_docente === tc &&
-                professor.categoria_cientifica === sc
-                )
-                total[`${tc} ${sc}`] += 1;
+                professor.categoria_cientifica === sc &&
+                professor.cargo_ocupacional === op
+              )
+                total[`${tc} ${sc} ${op}`] += 1;
             }
-            occupationalPosition.forEach((op) => {
-                if (!total[`${tc} ${sc} ${op}`]) {
+            contractType.forEach((ct) => {
+              if (!total[`${tc} ${sc} ${op} ${ct}`]) {
                 if (
-                    professor.categoria_docente === tc &&
-                    professor.categoria_cientifica === sc &&
-                    professor.cargo_ocupacional === op
+                  professor.categoria_docente === tc &&
+                  professor.categoria_cientifica === sc &&
+                  professor.cargo_ocupacional === op &&
+                  professor.tipo_de_contrato === ct
                 )
-                    total[`${tc} ${sc} ${op}`] = 1;
-                } else {
+                  total[`${tc} ${sc} ${op} ${ct}`] = 1;
+              } else {
                 if (
-                    professor.categoria_docente === tc &&
-                    professor.categoria_cientifica === sc &&
-                    professor.cargo_ocupacional === op
+                  professor.categoria_docente === tc &&
+                  professor.categoria_cientifica === sc &&
+                  professor.cargo_ocupacional === op &&
+                  professor.tipo_de_contrato === ct
                 )
-                    total[`${tc} ${sc} ${op}`] += 1;
-                }
-                contractType.forEach((ct) => {
-                if (!total[`${tc} ${sc} ${op} ${ct}`]) {
-                    if (
-                    professor.categoria_docente === tc &&
-                    professor.categoria_cientifica === sc &&
-                    professor.cargo_ocupacional === op &&
-                    professor.tipo_de_contrato === ct
-                    )
-                    total[`${tc} ${sc} ${op} ${ct}`] = 1;
-                } else {
-                    if (
-                    professor.categoria_docente === tc &&
-                    professor.categoria_cientifica === sc &&
-                    professor.cargo_ocupacional === op &&
-                    professor.tipo_de_contrato === ct
-                    )
-                    total[`${tc} ${sc} ${op} ${ct}`] += 1;
-                }
-                });
+                  total[`${tc} ${sc} ${op} ${ct}`] += 1;
+              }
             });
-            });
-        });      
+          });
+        });
+      });
     });
 
     ctx.body = total;
