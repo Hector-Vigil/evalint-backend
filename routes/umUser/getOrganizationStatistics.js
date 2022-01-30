@@ -27,19 +27,28 @@ const belongToOrganization = (organizations, professor) => {
   return org;
 };
 
+const isDocente = (professor) => {
+  for(let i = 0; i < 4; i++)
+    if(professor.categoria_docente === teachingCategory[i]) return true;
+  return false;
+}
+
 module.exports = {
   method: "post",
   path: "/organization-statistics",
   handler: async (ctx) => {
     const data = JSON.parse(localStorage.getItem("ASSET.json"));
     const total = {};
-
+    
     let { organizations } = ctx.request.body;
     console.log(organizations);
     organizations = JSON.parse(organizations);
-
+    let docente = 0;
+    let noDocente = 0;
     data.forEach((professor) => {
       if (belongToOrganization(organizations, professor)) {
+        if(!isDocente(professor)) noDocente++;
+        else docente++;
         teachingCategory.forEach((tc) => {
           if (!total[tc]) {
             if (professor.categoria_docente === tc) total[tc] = 1;
@@ -105,12 +114,8 @@ module.exports = {
             if (professor.categoria_cientifica === sc) total[sc] += 1;
           }
         });
-        total["Docente"] =
-          total["Auxiliar"] +
-          total["Instructor"] +
-          total["Titular"] +
-          total["Asistente"];
-        total["No Docente"] = Object.keys(data).length - total["Docente"];
+        total["Docente"] = docente;
+        total["No Docente"] = noDocente;
       }
     });
 

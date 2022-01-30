@@ -17,7 +17,7 @@ const app = new Koa();
 
 const routes = require("./routes");
 
-app.use(bodyParser());
+app.use(bodyParser({limit:"50mb"}));
 
 app.use(
   cors({

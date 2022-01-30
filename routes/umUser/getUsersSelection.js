@@ -17,6 +17,12 @@ const contractType = [
   "1",
 ];
 
+const isDocente = (professor) => {
+  for(let i = 0; i < 4; i++)
+    if(professor.categoria_docente === teachingCategory[i]) return true;
+  return false;
+}
+
 module.exports = {
   method: "post",
   path: "/users-statistics",
@@ -26,8 +32,12 @@ module.exports = {
 
     let { professors } = ctx.request.body;
     professors = JSON.parse(professors);
+    let docente = 0;
+    let noDocente = 0;
 
     professors.forEach((professor) => {
+      if(!isDocente(professor)) noDocente++;
+      else docente++;
       teachingCategory.forEach((tc) => {
         if (!total[tc]) {
           if (professor.categoria_docente === tc) total[tc] = 1;
@@ -86,6 +96,15 @@ module.exports = {
           });
         });
       });
+      scientificCategory.forEach((sc) => {
+        if (!total[sc]) {
+          if (professor.categoria_cientifica === sc) total[sc] = 1;
+        } else {
+          if (professor.categoria_cientifica === sc) total[sc] += 1;
+        }
+      });
+      total["Docente"] = docente;
+      total["No Docente"] = noDocente;
     });
 
     ctx.body = total;
