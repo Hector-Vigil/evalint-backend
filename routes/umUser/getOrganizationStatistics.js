@@ -28,7 +28,7 @@ const belongToOrganization = (organizations, professor) => {
 };
 
 const isDocente = (professor) => {
-  for(let i = 0; i < 4; i++)
+  for(let i = 0; i < teachingCategory.length; i++)
     if(professor.categoria_docente === teachingCategory[i]) return true;
   return false;
 }
@@ -45,10 +45,21 @@ module.exports = {
     organizations = JSON.parse(organizations);
     let docente = 0;
     let noDocente = 0;
+    let masc = 0;
+    let fem = 0;
+    let dpto = {};
     data.forEach((professor) => {
+      if(typeof dpto[`${professor.unidad_organizativa}`] !== "undefined")
+        dpto[`${professor.unidad_organizativa}`] = 1;
+      else dpto[`${professor.unidad_organizativa}`] += 1;
+      
       if (belongToOrganization(organizations, professor)) {
         if(!isDocente(professor)) noDocente++;
         else docente++;
+
+        if(professor.genero === "Masculino") masc++;
+        else fem++;
+
         teachingCategory.forEach((tc) => {
           if (!total[tc]) {
             if (professor.categoria_docente === tc) total[tc] = 1;
@@ -116,6 +127,9 @@ module.exports = {
         });
         total["Docente"] = docente;
         total["No Docente"] = noDocente;
+        total["Masculino"] = masc;
+        total["Femenino"] = fem;
+        total["Departamento"] = dpto;
       }
     });
 
