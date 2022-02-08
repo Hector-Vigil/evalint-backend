@@ -39,9 +39,9 @@ module.exports = {
     let dpto = {};
 
     professors.forEach((professor) => {
-      if(typeof dpto[`${professor.unidad_organizativa}`] !== "undefined")
-        dpto[`${professor.unidad_organizativa}`] = 1;
-      else dpto[`${professor.unidad_organizativa}`] += 1;
+      if(typeof dpto[professor.dept] === "undefined")
+        dpto[professor.dept] = 1;
+      else dpto[professor.dept] += 1;
 
       if(!isDocente(professor)) noDocente++;
       else docente++;
