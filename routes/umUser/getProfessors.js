@@ -17,6 +17,7 @@ module.exports = {
         categoria_cientifica: professor.categoria_cientifica,
         cargo_ocupacional: professor.cargo_ocupacional,
         tipo_de_contrato: professor.tipo_de_contrato,
+        genero: professor.genero,
       });
     });
 
