@@ -27,7 +27,6 @@ module.exports = {
   method: "post",
   path: "/users-statistics",
   handler: async (ctx) => {
-    // const data = JSON.parse(localStorage.getItem("ASSET.json"));
     const total = {};
 
     let { professors } = ctx.request.body;

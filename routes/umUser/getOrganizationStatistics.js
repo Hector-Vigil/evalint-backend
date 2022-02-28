@@ -41,7 +41,6 @@ module.exports = {
     const total = {};
     
     let { organizations } = ctx.request.body;
-    console.log(organizations);
     organizations = JSON.parse(organizations);
     let docente = 0;
     let noDocente = 0;
